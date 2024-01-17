@@ -44,7 +44,7 @@ CREATE TABLE regimenes_tributarios(
 /*INGRESADA x*/
 CREATE TABLE representantes_legales (    
     rut VARCHAR (15) NOT NULL PRIMARY KEY,
-    order_num INT NOT NULL,
+    priority BOOLEAN,
     id_cliente VARCHAR(15) NOT NULL,
     nombre VARCHAR(350) NOT NULL,
     clave VARCHAR(200),
@@ -59,7 +59,7 @@ INSERT INTO representantes_legales (rut,order_num,id_cliente,nombre,clave) VALUE
 CREATE TABLE actividad_comercial(
     id_cliente VARCHAR(15) NOT NULL,
     codigo VARCHAR(300) NOT NULL,
-    order_num INT, /* si hay mas de uno se selecciona por defecto el que tiene valor 1 */
+    priority BOOLEAN,
     FOREIGN KEY (id_cliente) REFERENCES clientes(rut)
 );
 
