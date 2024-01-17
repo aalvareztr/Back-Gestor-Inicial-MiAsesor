@@ -6,16 +6,6 @@ import { getContratos } from "../controllers/AppControllers.js";
 
 const route  = Router()
 
-route.get('/api',async(req,res)=>{
-    try{
-        const contra = await bcrypt.hash("Zamael2512",15)
-        return res.json({ok:true,contra})
-    }catch(err){
-        console.log(err)
-        return res.status(400).json({message:err})
-    }
-    
-})
 
 route.get('/api/contratos',getContratos)
 
