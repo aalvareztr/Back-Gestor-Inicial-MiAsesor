@@ -1,13 +1,22 @@
 import { Router } from "express";
 import { connect } from "../db/db.js";
 import bcrypt from 'bcrypt';
-import { getContratos } from "../controllers/AppControllers.js";
+import { checkAuth, getContratos, login, verifyToken } from "../controllers/AppControllers.js";
 
 
 const route  = Router()
 
 
+route.post('/api/login',login);
+
+
+route.get('/api/check-auth',verifyToken,checkAuth);
+
+
+/*
 route.get('/api/contratos',getContratos)
+
+
 
 
 route.get('/api/contrato/:id',async(req,res)=>{
@@ -18,6 +27,8 @@ route.get('/api/contrato/:id',async(req,res)=>{
         res.status(400).json({message:err})
     }
 })
+
+*/
 
 
 export default route

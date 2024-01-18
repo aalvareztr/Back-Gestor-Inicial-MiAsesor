@@ -1,18 +1,52 @@
 import { connect } from "../db/db.js"
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
+import cookieParser from "cookie-parser";
 
 //Middleware para verificar token
 export const verifyToken = (req,res,next) =>{
     try{
       const token = req.cookies.tkn
-      const validPayload = jwt.verify(token,process.env.JWT_SECRET_KEY)
+      console.log('token')
+      const validPayload = jwt.verify(token,
+        //process.env.JWT_SECRET_KEY
+        'secret_key'
+        )
+      console.log(validPayload)
       next()
     }catch(err){
       return res.status(401).json({ok:false,message:'invalid token'})
     }
 }
 
+//Funcion check auth
+export const checkAuth = async (req,res) =>{
+    return res.status(200).json({ok:true,message:"auth token!"})
+}
 
+
+//Signin
+export const login = async (req,res) =>{
+    const { username,password } = req.body;
+    try{    
+        const result = await connect.execute('SELECT * FROM usuarios WHERE username = ?',[username]);
+        //console.log(result)
+        if(result[0].length !== 1){
+          return res.status(401).json({message:"el email no es valido"});
+        }
+        const user = result[0][0]
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if(isPasswordValid === false){
+          return res.status(401).json({message:"contraseña incorrecta"});
+        }
+        const token = jwt.sign({username}, //process.env.JWT_SECRET_KEY
+        'secret_key'
+        );
+        return res.status(200).json({token});
+    }catch(err){
+        return res.json({ok:false,message:"error del servidor"}).status(400)
+    }
+}
 
 
 export const getContratos = async(req,res) =>{
