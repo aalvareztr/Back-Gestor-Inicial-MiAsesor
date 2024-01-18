@@ -47,7 +47,7 @@ export const login = async (req,res) =>{
 
 export const getContratos = async(req,res) =>{
     try{
-        const [contratos] = await connect.execute('SELECT contratos.fecha,clientes.razon_social,clientes.tipo,contratos.id AS contratoId,clientes.rut AS idCliente FROM contratos INNER JOIN clientes ON contratos.id_cliente = clientes.rut')
+        const [contratos] = await connect.execute('SELECT contratos.fecha,clientes.razon_social,clientes.tipo,contratos.id AS idContrato,clientes.rut AS idCliente FROM contratos INNER JOIN clientes ON contratos.id_cliente = clientes.rut')
         return res.status(200).json({contratos})
     }catch(err){
         return res.status(400).json({message:err})
@@ -57,8 +57,13 @@ export const getContratos = async(req,res) =>{
 
 export const getContratoDetail = async (req,res) =>{
     const idContrato = req.query.idContrato
-    const idCliente = req.query.idCliente
+    //const idCliente = req.query.idCliente
     try{
+      const [cliente] = await connect.execute('SELECT clientes.razon_social AS razon_social, clientes.tipo AS tipo_de_cliente, clientes.rut, clientes.mail, clientes.telefono FROM contratos INNER JOIN clientes ON clientes.rut = contratos.id_cliente WHERE contratos.id = ?',[idContrato]);
+
+      const [planes] = await connect.execute('SELECT planes.nombre, planes.precio, planes.descripcion, planes.mes_de_gracia FROM planes_por_contrato INNER JOIN planes ON planes_por_contrato.id_plan = planes.id WHERE planes_por_contrato.id_contrato = ?',[idContrato])
+      return res.status(200).json({cliente:cliente[0],planes})
+      /*
         const [contrato] = await connect.execute(`
             SELECT clientes.razon_social AS razon_social, clientes.tipo AS tipo_de_cliente, clientes.rut, clientes.mail, clientes.telefono, representantes_legales.nombre AS representante_legal 
             FROM clientes INNER JOIN representantes_legales ON clientes.rut = representantes_legales.id_cliente 
@@ -68,7 +73,7 @@ export const getContratoDetail = async (req,res) =>{
 
         const [planes] = await connect.execute('SELECT planes.nombre, planes.descripcion, planes.precio, planes.mes_de_gracia FROM planes_por_contrato INNER JOIN planes ON planes_por_contrato.id_plan = planes.id WHERE planes_por_contrato.id_contrato = ?',[idContrato])
         return res.status(200).json({contrato,planes})
-
+      */
     }catch(err){
       return res.status(400).json({message:err})
     }
