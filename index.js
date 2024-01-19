@@ -15,6 +15,7 @@ const corsOptions = {
 
 console.log("Hola agos como va");
 console.log("Hola agos como va, desde la nueva rama");
+console.log("No me claves el visto");
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser())
