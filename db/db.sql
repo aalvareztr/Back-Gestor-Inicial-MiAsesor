@@ -177,6 +177,23 @@ CREATE TABLE servicios_adicionales_personalizados(
 );
 
 
+
+
+CREATE TABLE SAP_por_contrato(
+    id_SAP VARCHAR(100) NOT NULL,
+    id_contrato VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_SAP) REFERENCES servicios_adicionales_personalizados(id),
+    FOREIGN KEY (id_contrato) REFERENCES contratos(id)
+);
+
+
+CREATE TABLE SA_por_contrato(
+    id_SA VARCHAR(100) NOT NULl,
+    id_contrato VARCHAR(100) NOT NULL,
+    FOREIGN KEY (id_SA) REFERENCES servicios_adicionales(id),
+    FOREIGN KEY (id_contrato) REFERENCES contratos(id)
+);
+
 /*Datos de prueba*/
 
 INSERT INTO CLIENTES 

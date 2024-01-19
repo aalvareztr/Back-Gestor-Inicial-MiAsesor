@@ -2,7 +2,6 @@ import { connect } from "../db/db.js"
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import cookieParser from "cookie-parser";
-
 //Middleware para verificar token
 export const verifyToken = (req,res,next) =>{
     try{
@@ -28,7 +27,7 @@ export const login = async (req,res) =>{
     try{    
         const result = await connect.execute('SELECT * FROM usuarios WHERE username = ?',[username]);
         if(result[0].length !== 1){
-          return res.status(401).json({message:"el email no es valido"});
+          return res.status(401).json({message:"el usuario no es valido"});
         }
         const user = result[0][0]
 

@@ -4,12 +4,15 @@ import cors from 'cors';
 import 'dotenv/config';
 import cookieParser from "cookie-parser";
 import bcrypt from 'bcrypt';
+import { v4 as uuid } from "uuid";
+
 
 const app = express()
 const corsOptions = {
     origin: process.env.APP_URL,
     credentials: true,
 };
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
