@@ -13,7 +13,7 @@ const corsOptions = {
     credentials: true,
 };
 
-
+console.log("Hola agos como va");
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser())
