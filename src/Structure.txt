@@ -1,0 +1,34 @@
+/project-root
+|-- src
+|   |-- controllers
+|   |   |-- userController.js
+|   |   |-- courseController.js
+|   |   |-- paymentController.js
+|
+|   |-- models
+|   |   |-- User.js
+|   |   |-- Course.js
+|   |   |-- Payment.js
+|
+|   |-- services
+|   |   |-- userService.js
+|   |   |-- courseService.js
+|   |   |-- paymentService.js
+|
+|   |-- routes
+|   |   |-- userRoutes.js
+|   |   |-- courseRoutes.js
+|   |   |-- paymentRoutes.js
+|
+|   |-- utils
+|       |-- validation.js
+|       |-- errorHandling.js
+|
+|-- config
+|   |-- database.js
+|   |-- server.js
+|
+|-- app.js
+|-- package.json
+|-- .env
+|-- README.md
