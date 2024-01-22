@@ -22,6 +22,4 @@ export const PPC = sequelize.define('PPC', {
 
 PPC.belongsTo(Contrato,{foreignKey:'id_contrato'});
 PPC.belongsTo(Plan,{foreignKey:'id_plan'})
-//PPC.belongsTo(Cliente,{foreignKey:'id_cliente'})
 
-//Contrato.belongsTo(Cliente,{foreignKey:'id_cliente'})
