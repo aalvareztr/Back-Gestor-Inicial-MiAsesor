@@ -1,4 +1,3 @@
-/*Modelo plan por contrato*/
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../config/database.js";
 import { Contrato } from "./Contrato.js";

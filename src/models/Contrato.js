@@ -1,6 +1,3 @@
-
-//Archivo Contrato.js
-
 import { DataTypes } from "sequelize";
 import { sequelize } from "../../config/database.js";
 import { Cliente } from "./Cliente.js";
