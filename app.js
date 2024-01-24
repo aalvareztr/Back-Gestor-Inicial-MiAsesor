@@ -3,9 +3,11 @@ import cors from 'cors';
 import 'dotenv/config';
 import cookieParser from 'cookie-parser';
 //rutas
-import loginRoute from './src/routes/login.js'
+import loginRoute from './src/routes/login.js';
 //ruta para los contratos
-import testRoutes from './src/routes/testerRoutes.js'
+import testRoutes from './src/routes/testerRoutes.js';
+//ruta para el check auth
+import checkRoute from './src/routes/checkAuth.js';
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/login',loginRoute);
 app.use('/legal',testRoutes) 
-
+app.use('/api',checkRoute)
 
 const PORT = 3000 || process.env.PORT;
 app.listen(PORT)
